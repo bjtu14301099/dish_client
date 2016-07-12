@@ -125,6 +125,4 @@ public class RegisterActivity extends AppCompatActivity {
         msg.obj = obj;
         mHandler.sendMessage(msg);
     }
-
-
 }
