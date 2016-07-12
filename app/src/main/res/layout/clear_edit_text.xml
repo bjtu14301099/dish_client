@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:background="#ffffff">
+
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dip"
+    android:text="hello"
+    android:gravity="center"
+    android:textSize="20sp"
+    android:textColor="#000000" />
+
+<widget.ClearEditText
+    android:id="@+id/clearEditText"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dip"
+    android:paddingRight="8dip"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip"
+    android:hint="请输入QQ号码"
+    android:drawableLeft="@mipmap/ic_l1"
+    android:drawableRight="@mipmap/ic_launcher" />
+
+</LinearLayout>
