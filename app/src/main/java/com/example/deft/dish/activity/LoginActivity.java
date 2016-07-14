@@ -86,7 +86,8 @@ public class LoginActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                //RegisterActivity
+                Intent intent = new Intent(LoginActivity.this, LocationActivity.class);
                 LoginActivity.this.startActivity(intent);
             }
         });

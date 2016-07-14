@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, UploadMenuActivity.class);
                 MainActivity.this.startActivity(intent);
             }
 
