@@ -1,21 +1,28 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "24.0.0"
 
     defaultConfig {
+        jackOptions { enabled true }
+
         applicationId "com.example.deft.myapplication222"
         minSdkVersion 23
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 
@@ -24,10 +31,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
-    compile files('libs/commons-codec-1.6.jar')
-    compile files('libs/commons-logging-1.1.1.jar')
-    compile files('libs/fluent-hc-4.2.5.jar')
-    compile files('libs/httpclient-4.2.5.jar')
-    compile files('libs/httpclient-cache-4.2.5.jar')
-    compile files('libs/locSDK_4.2.jar')
 }

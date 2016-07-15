@@ -17,6 +17,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonSelect = null;
     private static ProgressDialog loginProgress;
     private static final int MSG_LOGIN_RESULT = 0;
-    private static Handler mHandler;
+    private MyHandler mHandler;
 
     private void handleLoginResult(JSONObject json) {
         /*
@@ -61,20 +62,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (mHandler == null) {
-            mHandler = new Handler(getApplicationContext().getMainLooper()) {
-                public void handleMessage(Message msg) {
-                    switch (msg.what) {
-                        case MSG_LOGIN_RESULT:
-                            loginProgress.dismiss();
-                            JSONObject json = (JSONObject) msg.obj;
-                            handleLoginResult(json);
-                            break;
-                    }
-                }
-            };
-        }
-
         setContentView(R.layout.content_main222);
 
         buttonRegister = (Button) findViewById(R.id.button9);
@@ -99,13 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                                        }
         );
 
-        buttonSelect.setOnClickListener(new View.OnClickListener() {
-                                            public void onClick(View v) {
-                                                Intent intent = new Intent(LoginActivity.this, SelectActivity.class);
-                                                LoginActivity.this.startActivity(intent);
-                                            }
-                                        }
-        );
+        buttonSelect.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SelectActivity.class);
+            LoginActivity.this.startActivity(intent);
+        });
+        mHandler = new MyHandler(this);
 
     }
 
@@ -147,5 +132,23 @@ public class LoginActivity extends AppCompatActivity {
         return HttpUtil.request(serverUrl, params);
     }
 
+    private static class MyHandler extends Handler {
+        private WeakReference<LoginActivity> mOuter;
 
+        MyHandler(LoginActivity activity) {
+            mOuter = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            LoginActivity outer = mOuter.get();
+            switch (msg.what) {
+                case MSG_LOGIN_RESULT:
+                    loginProgress.dismiss();
+                    JSONObject json = (JSONObject) msg.obj;
+                    outer.handleLoginResult(json);
+                    break;
+            }
+        }
+    }
 }

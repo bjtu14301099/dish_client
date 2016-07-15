@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import com.example.deft.dish.R;
 
 import java.util.ArrayList;
@@ -49,14 +48,12 @@ public class MainActivity extends AppCompatActivity implements
         initViewPage();
         initEvent();
 
-        Toast.makeText(getApplicationContext(), "默认Toast样式",
-                Toast.LENGTH_SHORT).show();
-        my_button = (Button)tab03.findViewById(R.id.button8);
-        my_button.setOnClickListener(new View.OnClickListener(){
+        my_button = (Button) tab03.findViewById(R.id.button8);
+        my_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                Intent intent = new Intent(MainActivity.this, UploadMenuActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 MainActivity.this.startActivity(intent);
             }
 
@@ -191,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             default:
                 break;
-    }
+        }
     }
 
     /**
