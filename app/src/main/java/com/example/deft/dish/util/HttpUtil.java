@@ -41,6 +41,23 @@ public class HttpUtil {
         return null;
     }
 
+    public static com.alibaba.fastjson.JSONObject request2(String url, List<NameValuePair> params) {
+        String SERVER_URL = URL_ROOT + url;
+        HttpClient client = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(SERVER_URL);
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+            HttpResponse httpResponse = client.execute(httpPost);
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                return com.alibaba.fastjson.JSON.parseObject(EntityUtils.toString(httpResponse.getEntity()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+
     private static final String APPLICATION_JSON = "application/json";
 
     public static JSONObject jsonRequest(String url, Object body) {

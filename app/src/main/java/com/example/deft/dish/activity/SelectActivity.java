@@ -8,13 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.deft.dish.R;
+import com.example.deft.dish.modal.Dish;
 import com.example.deft.dish.util.HttpUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,20 +29,12 @@ public class SelectActivity extends AppCompatActivity {
     private void handleSelectResult(JSONObject json) {
 
 
-        int returnCode = -1;
-        String message = "服务器异常";
-        JSONArray datam = null;
-        try {
-            returnCode = json.getInt("return_code");
-            message = json.getString("message");
-            datam = json.getJSONArray("data");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        int returnCode = json.getInteger("return_code");
+        String message = json.getString("message");
+        List<Dish> dishes = JSON.parseArray(json.getJSONArray("data").toJSONString(), Dish.class);
         switch (returnCode) {
             case 0:
-
-                onSelectSuccess(datam);
+                onSelectSuccess(dishes);
                 break;
             default:
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -76,7 +68,7 @@ public class SelectActivity extends AppCompatActivity {
         buttonSelect.setOnClickListener(new View.OnClickListener() {
                                             public void onClick(View v) {
                                                 //String dish = dishEditText.getText().toString();
-                                                String dish = "1";
+                                                String dish = "么";
                                                 select(dish);
 
 
@@ -85,18 +77,13 @@ public class SelectActivity extends AppCompatActivity {
         );
     }
 
-    private void onSelectSuccess(JSONArray data) {
-        try {
-            JSONObject jo = (JSONObject) data.get(0);
-            Toast.makeText(this, jo.getString("dish_name"), Toast.LENGTH_LONG).show();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    private void onSelectSuccess(List<Dish> data) {
+        Toast.makeText(this, data.size(), Toast.LENGTH_LONG).show();
     }
 
 
     private void select(final String dishname) {
-        selectProgress = ProgressDialog.show(this, null, "查找中...");
+        selectProgress = ProgressDialog.show(this, null, "加载中...");
 
         new Thread(new Runnable() {
             @Override
@@ -107,11 +94,11 @@ public class SelectActivity extends AppCompatActivity {
     }
 
 
-    private static JSONObject connectServer(final String dish) {
-        String serverUrl = "admin_table_search";
+    private static JSONObject connectServer(final String name) {
+        String serverUrl = "search_dish";
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("dishname", dish));
-        return HttpUtil.request(serverUrl, params);
+        params.add(new BasicNameValuePair("name", name));
+        return HttpUtil.request2(serverUrl, params);
     }
 
     private void sendMessage(int what, Object obj) {
