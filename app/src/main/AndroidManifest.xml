@@ -63,7 +63,7 @@
                 android:label="@string/title_activity_basic"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="com.example.deft.dish.activity.UploadMenuActivity"/>
-        <activity android:name="com.example.deft.dish.activity.Process"/>
+        <activity android:name=".activity.ProcessActivity"/>
         <activity android:name="com.example.deft.dish.activity.AddProcess"/>
         <activity android:name="com.example.deft.dish.activity.SelectActivity"/>
         <activity android:name="com.example.deft.dish.activity.LocationActivity"/>

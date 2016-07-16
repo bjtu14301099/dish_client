@@ -128,7 +128,7 @@ public class UploadMenuActivity extends AppCompatActivity {
         public void onClick(View v)
         {
             Intent intent=new Intent();
-            intent.setClass(UploadMenuActivity.this,Process.class);
+            intent.setClass(UploadMenuActivity.this,ProcessActivity.class);
 
             Bundle bundle=new Bundle();
             bundle.putString("name",name.getText().toString());

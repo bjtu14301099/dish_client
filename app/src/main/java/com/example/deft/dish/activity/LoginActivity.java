@@ -86,9 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                                        }
         );
 
-        buttonSelect.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, SelectActivity.class);
-            LoginActivity.this.startActivity(intent);
+        buttonSelect.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SelectActivity.class);
+                LoginActivity.this.startActivity(intent);
+            }
         });
         mHandler = new MyHandler(this);
 
