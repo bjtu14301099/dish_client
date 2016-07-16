@@ -67,6 +67,7 @@
         <activity android:name="com.example.deft.dish.activity.AddProcess"/>
         <activity android:name="com.example.deft.dish.activity.SelectActivity"/>
         <activity android:name="com.example.deft.dish.activity.LocationActivity"/>
+        <activity android:name="com.example.deft.dish.activity.SearchRestaurantActivity"/>
     </application>
 
 </manifest>

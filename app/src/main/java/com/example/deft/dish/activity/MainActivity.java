@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                Intent intent = new Intent(MainActivity.this, SelectActivity.class);
+                Intent intent = new Intent(MainActivity.this, SearchRestaurantActivity.class);
                 MainActivity.this.startActivity(intent);
             }
 
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements
                         mSettingImg.setImageResource(R.mipmap.ic_launcher);
                         break;
                     default:
+//                        AppState.getInstance().getUser();
                         break;
                 }
             }

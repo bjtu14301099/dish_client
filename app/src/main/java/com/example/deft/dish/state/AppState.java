@@ -1,4 +1,4 @@
-package com.example.deft.dish.stat;
+package com.example.deft.dish.state;
 
 import com.example.deft.dish.modal.User;
 
